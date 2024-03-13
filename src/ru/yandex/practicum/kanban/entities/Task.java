@@ -1,4 +1,4 @@
-package ru.yandex.practicum.kanban;
+package ru.yandex.practicum.kanban.entities;
 
 import java.util.Objects;
 
@@ -6,19 +6,7 @@ public class Task {
     protected String name;
     protected String description;
     protected int id;
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
     protected Status status;
-    public Status getStatus() {
-        return this.status;
-    }
-
 
     public Task(String name, String description) {
         this.name = name;
@@ -26,18 +14,31 @@ public class Task {
         this.status = Status.NEW;
     }
 
-    public Task(String name, String description, int id) {
-        this.name = name;
-        this.description = description;
-        this.status = Status.NEW;
-        this.id = id;
-    }
-
     public Task(String name, String description, int id, Status status) {
         this.name = name;
         this.description = description;
         this.status = status;
         this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Status getStatus() {
+        return this.status;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override

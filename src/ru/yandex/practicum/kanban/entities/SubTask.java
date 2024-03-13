@@ -1,32 +1,21 @@
-package ru.yandex.practicum.kanban;
+package ru.yandex.practicum.kanban.entities;
 
 public class SubTask extends Task{
     protected int epicId;
-
-    public int getEpicId() {
-        return epicId;
-    }
-
-    public void setEpicId(int newEpicId) {
-        this.epicId = newEpicId;
-    }
 
     public SubTask(String name, String description, int epicId) {
         super(name, description);
         this.epicId = epicId;
     }
 
-    public SubTask(String name, String description, int id, int epicId) {
-        super(name, description, id);
-        this.epicId = epicId;
-    }
-
     public SubTask(String name, String description, int id, int epicId, Status status) {
-        super(name, description, id);
+        super(name, description, id, status);
         this.epicId = epicId;
-        this.status = status;
     }
 
+    public int getEpicId() {
+        return epicId;
+    }
 
     @Override
     public String toString() {
