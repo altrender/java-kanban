@@ -1,7 +1,7 @@
 package ru.yandex.practicum.kanban.entities;
 
 public class SubTask extends Task{
-    protected int epicId;
+    private int epicId;
 
     public SubTask(String name, String description, int epicId) {
         super(name, description);

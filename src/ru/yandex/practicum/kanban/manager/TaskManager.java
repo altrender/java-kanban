@@ -21,13 +21,6 @@ public class TaskManager {
     }
 
     public ArrayList<Task> getAllTasks() {
-        /*  оставил себе, чтобы лучше понимать, как можно писать короче)
-        ArrayList<Task> listTasks = new ArrayList<>();
-        for (Integer i : tasks.keySet()) {
-            listTasks.add(tasks.get(i));
-        }
-        return listTasks;
-        */
         return new ArrayList<>(tasks.values());
     }
 
@@ -70,7 +63,7 @@ public class TaskManager {
         int epicId = subTask.getEpicId();
         subTask.setId(subTaskId);
         subTasks.put(subTaskId, subTask);
-        epics.get(epicId).AddSubTask(subTaskId);
+        epics.get(epicId).addSubTask(subTaskId);
         // при создании подзадачи, проверим, не стоит ли поменять статус эпика
         // к примеру, если Эпик был в DONE, то теперь он перейдет в IN_PROGRESS
         checkUpdateStatus(epicId);
@@ -103,11 +96,13 @@ public class TaskManager {
     }
 
     public void modifyEpic(Epic epic) {
-        if (epics.containsKey(epic.getId())) {
-            epics.put(epic.getId(), epic);
+        int epicId = epic.getId();
+        if (epics.containsKey(epicId)) {
+            // проверка статуса эпика не требуется, поэтому напрямую обновим имя и описание, этого достаточно
+            Epic currentEpic = epics.get(epicId);
+            currentEpic.setName(epic.getName());
+            currentEpic.setDescription(epic.getDescription());
         }
-        // обязательно проверим статус эпика, ведь к нему моги приписать другие подзадачи
-        checkUpdateStatus(epic.getId());
     }
 
     public void deleteTask(Integer taskId) {
@@ -134,9 +129,17 @@ public class TaskManager {
             for (Integer subTaskId : epic.getSubTasks()) {
                 subTasks.remove(subTaskId);
             }
-            // ну и заодно удалим все сабтаски из самого эпика
-            epic.removeAllSubTasks();
         }
+    }
+
+    public ArrayList<Task> getSubTasksByEpic(Integer epicId) {
+        ArrayList<Task> subTasksByEpic = new ArrayList<>();
+        if (epics.containsKey(epicId)) {
+            for (Integer subTaskId : epics.get(epicId).getSubTasks()) {
+                subTasksByEpic.add(subTasks.get(subTaskId));
+            }
+        }
+        return subTasksByEpic;
     }
 
     private void checkUpdateStatus(int epicId) {

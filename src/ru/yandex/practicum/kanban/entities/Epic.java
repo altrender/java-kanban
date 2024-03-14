@@ -10,12 +10,6 @@ public class Epic extends Task {
         this.subTasks = new ArrayList<>();
     }
 
-    public void setStatus(Status newStatus) {
-        if (newStatus != this.status) {
-            this.status = newStatus;
-        }
-    }
-
     public ArrayList<Integer> getSubTasks() {
         return subTasks;
     }
@@ -28,7 +22,7 @@ public class Epic extends Task {
         subTasks.clear();
     }
 
-    public void AddSubTask(Integer subTaskId) {
+    public void addSubTask(Integer subTaskId) {
         subTasks.add(subTaskId);
     }
 

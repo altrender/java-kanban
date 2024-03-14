@@ -44,6 +44,12 @@ public class Main {
                         subTask.getEpicId(), Status.DONE));
             }
         }
+        // меняем описание у эпиков
+        int i = 0;
+        for (Epic epic : tracker.getAllEpics()) {
+            i++;
+            epic.setDescription("Эпик_дескрипшн " + i);
+        }
         System.out.println(("Кейс 2. Изменение статусов."));
         printAll(tracker);
 
@@ -54,6 +60,10 @@ public class Main {
         tracker.deleteSubTask(tracker.getAllSubTasks().get(0).getId());
         System.out.println(("Кейс 3. Удаление задачи, эпика, подзадачи."));
         printAll(tracker);
+
+        // Проверим метод получения сабтасков по эпику
+        System.out.println("Кейс 4. Выводим на печать все подзадачи эпика.");
+        System.out.println(tracker.getSubTasksByEpic(tracker.getAllEpics().get(0).getId()));
     }
 
     public static void printAll(TaskManager tracker) {
